@@ -1,7 +1,7 @@
 <template>
   <div class="nun">
     <div class="s-card text-white" :class="classs('','ying')">
-      <div class="s-top clearfix h-500" :class="classs('s-top','')">
+      <div class="s-top clearfix h-500" v-if="size == `x`">
         <div class="float-left" style="margin-left:15px; margin-top:20px;">
           <h5>Visitor.</h5>
           <h2>{{index+1}}</h2>
@@ -14,7 +14,11 @@
         <img :src="user.image" :height="windowHeight" width="100%" v-if="size == `x`">
         <img :src="user.image" :height="windowHeight/2" width="100%" v-else>
       </div>
-      <div class="s-bottom pt-4 text-center" :class="size == 'x' ? 'h500':'h250' + ' ' +classs('s-top','')" >
+      <div
+        class="s-bottom pt-4 text-center"
+        :class="size == 'x' ? 'h500':'h250'"
+        v-if="size == `x`"
+      >
         <h1>{{user.name}}</h1>
       </div>
     </div>
@@ -25,10 +29,10 @@
 export default {
   props: ["index", "user", "size"],
   methods: {
-    classs(classs,classs2) {
-      return this.size == 'x' ? classs: classs2
+    classs(classs, classs2) {
+      return this.size == "x" ? classs : classs2;
     }
-  },
+  }
 };
 </script>
 
@@ -43,11 +47,9 @@ img {
   position: relative;
 }
 .ying {
-    background: url("/bg2.png") no-repeat;
-      background-size: contain;
+  background: url("/bg2.png") no-repeat;
+  background-size: contain;
   width: 100%;
-
-
 }
 .s-top {
   background: url("/bg-top.png") no-repeat;
@@ -58,22 +60,23 @@ img {
   padding: 15px;
 }
 .h-500 {
+  margin-top: 0;
   height: 500px;
 }
 .h-250 {
   height: 300px;
 }
 .s-bottom {
+  bottom: -100px;
   background: url("/bg-bot.png") no-repeat;
   background-size: contain;
   width: 100%;
-  bottom:0;
+  bottom: 0;
   height: 321px;
   position: absolute;
   z-index: 999;
   padding: 15px;
   h1 {
-   
     display: inline-block;
     background-size: contain;
     position: absolute;
