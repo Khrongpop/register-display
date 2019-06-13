@@ -4,7 +4,12 @@ import router from './router'
 import store from './store'
 import VueFire from 'vuefire'
 Vue.use(VueFire);
+import BootstrapVue from 'bootstrap-vue'
+// app.js
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+Vue.use(BootstrapVue)
 Vue.config.productionTip = false
 
 new Vue({

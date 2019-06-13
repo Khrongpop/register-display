@@ -1,18 +1,32 @@
 <template>
   <div class="home">
-    <h1>display1</h1>
-    <pre>
-    {{users}}
-    </pre>
+    <div class="row">
+
+    <div v-for="(user, index) in users" :key="user.name" class="col-4" style="height:100%;" v-if="index < 3">
+        <card :user="user" :index="index" v-if="index == 0"/>
+
+        <div v-if="index > 0">
+          <card :user="user" :index="index"/>
+        </div>
+    </div>
+        </div>
+
   </div>
 </template>
 
 <script>
+import Card from '../components/Card';
 import { usersRef } from '@/firebaseConfig.js'
 export default {
   firebase:{
     users: usersRef
   },
+  components:{
+    Card
+  },
   name: 'home'
 }
 </script>
+<style>
+
+</style>
