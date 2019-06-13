@@ -10,6 +10,7 @@
           <img src="/logo.png" width="100" style="margin-left:-150px;">
         </div>
       </div>
+      <div v-else class="bg2 clearfix h-500"></div>
       <div class="s-img">
         <img :src="user.image" :height="windowHeight" width="100%" v-if="size == `x`">
         <img :src="user.image" :height="windowHeight/2" width="100%" v-else>
@@ -46,10 +47,11 @@ img {
 .nun {
   position: relative;
 }
-.ying {
+.bg2 {
   background: url("/bg2.png") no-repeat;
   background-size: contain;
   width: 100%;
+  position: absolute;
 }
 .s-top {
   background: url("/bg-top.png") no-repeat;
