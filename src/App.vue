@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+// import HelloWorld from "./components/HelloWorld.vue";
 import { users } from "../firebaseConfig.js";
 export default {
   name: "app",
@@ -15,7 +15,10 @@ export default {
     users: users
   },
   components: {
-    HelloWorld
+    // HelloWorld
+  },
+  mounted() {
+    // console.log("Made it here.");
   }
 };
 </script>
