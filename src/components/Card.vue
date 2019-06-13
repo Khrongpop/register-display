@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="nun">
     <div class="s-card text-white">
-      <div class="s-top clearfix">
+      <div class="s-top clearfix h-500">
         <div class="float-left" style="margin-left:15px; margin-top:20px;">
           <h5>Visitor.</h5>
           <h2>{{index+1}}</h2>
@@ -14,7 +14,7 @@
         <img :src="user.image" :height="windowHeight" width="100%" v-if="size == `x`">
         <img :src="user.image" :height="windowHeight/2" width="100%" v-else>
       </div>
-      <div class="s-bottom pt-4 text-center">
+      <div class="s-bottom pt-4 text-center" :class="size == 'x' ? 'h500':'h250'">
         <h1>{{user.name}}</h1>
       </div>
     </div>
@@ -34,21 +34,26 @@ export default {
 img {
   object-fit: cover;
 }
-
+.nun {
+  position: relative;
+}
 .s-top {
   background: url("/bg-top.png") no-repeat;
   background-size: contain;
-  height: 400px;
   width: 100%;
   position: absolute;
   z-index: 999;
   padding: 15px;
 }
-
+.h-500 {
+  height: 500px;
+}
+.h-250 {
+  height: 300px;
+}
 .s-bottom {
   background: url("/bg-bot.png") no-repeat;
   background-size: contain;
-  height: 400px;
   width: 100%;
   bottom: -184px;
   @include media-breakpoint-up(xl) {
