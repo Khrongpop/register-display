@@ -9,23 +9,15 @@
 </template>
 
 <style>
-/* #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
+
+@font-face {
+  font-family: 'dbadmanx';
+  src: url('/dbadmanx.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-} */
+body, html , input , option , textarea {
+  font-family: 'dbadmanx' !important;
+} 
 </style>
