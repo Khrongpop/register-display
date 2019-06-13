@@ -10,7 +10,18 @@
           <img src="/logo.png" width="100" style="margin-left:-150px;">
         </div>
       </div>
-      <div v-else class="bg2 clearfix h-600"></div>
+      <div v-else class="bg2 clearfix h-600">
+        <div class="float-left" style="margin-left:15px; margin-top:20px;">
+          <h5>Visitor.</h5>
+          <h2>{{index+1}}</h2>
+        </div>
+
+        <div class="float-right">
+          <img src="/logo.png" width="100" style="margin-left:-150px;">
+        </div>
+
+        <h1>{{user.name}}</h1>
+      </div>
       <div v-if="size == `y`" class="bg3 clearfix h-600"></div>
       <div class="s-img">
         <img :src="user.image" :height="windowHeight" width="100%" v-if="size == `x`">
@@ -54,6 +65,12 @@ img {
   background-size: contain;
   width: 100%;
   position: absolute;
+
+  h1 {
+    position: absolute;
+    top: 475px;
+    left: 50px;
+  }
 }
 .bg3 {
   background: url("/right-bg.png") no-repeat;
