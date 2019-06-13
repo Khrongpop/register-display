@@ -2,14 +2,14 @@
   <div class="home">
     <div class="row">
 
-    <div v-for="(user, index) in users.reverse()" :key="user.name" class="col-4 p-0" style="height:100%;">
+    <div v-for="(user, index) in users" :key="user.name" class="col-4 p-0" style="height:100%;">
         <card :user="user" :index="index" v-if="index == 0"/>
 
         <div v-if="index > 0">
           <card :user="user" :index="index"/>
         </div>
     </div>
-        </div>
+      </div>
 
   </div>
 </template>
