@@ -27,10 +27,25 @@ export default {
 img {
   object-fit: cover;
 }
+
 .s-top {
-    padding: 10px;
+  background: url('/bg-top.png') no-repeat;
+  background-size: contain;
+  height: 400px;
     width: 100%;
     position: absolute;
     z-index: 999;
+    padding: 15px;
+}
+
+.s-bottom {
+  background: url('/bg-bot.png') no-repeat;
+  background-size: contain;
+  height: 400px;
+  width: 100%;
+  margin-top: -218px;
+  position: absolute;
+  z-index: 999;
+  padding: 15px;
 }
 </style>
