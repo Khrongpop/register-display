@@ -1,18 +1,31 @@
 <template>
   <div class="home">
-    {{get5Index}}
-    <!-- <div style="width:50%; height:100%; float:left">
-      <card :user="users[getFistIndex]" :index="index" size="x"/>
+    <div v-if="users.length >= 8">
+      <div style="width:50%; height:100%; float:left">
+        <card :user="users[getSecondIndex]" :index="index" size="x"/>
+      </div>
+      <div style="width:50%; height:100%; float:right">
+        <div style="width:100%;  height:50%; float:left">
+          <card :user="users[get5Index]" :index="index" size="y"/>
+        </div>
+        <div style="width:100%;  height:50%; float:left">
+          <card :user="users[get8Index]" :index="index" size="y"/>
+        </div>
+      </div>
     </div>
-    <div style="width:50%; height:100%; float:right">
-      <div style="width:100%;  height:50%; float:left">
-        <card :user="users[getSecondIndex]" :index="index" size="y"/>
+    <div v-if-else="users.length >= 5">
+      <div style="width:50%; height:100%; float:left">
+        <card :user="users[getSecondIndex]" :index="index" size="x"/>
       </div>
-      <div style="width:100%;  height:50%; float:left">
-        <card :user="users[getThirdIndex]" :index="index" size="y"/>
+      <div style="width:50%; height:100%; float:left">
+        <card :user="users[get5Index]" :index="index" size="x"/>
       </div>
-    </div>-->
-    <input type="text" v-model="count">
+    </div>
+    <div v-if-else="users.length >= 2">
+      <div style="width:100%; height:100%; float:left">
+        <card :user="users[getSecondIndex]" :index="index" size="x"/>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -33,8 +46,8 @@ export default {
   },
   computed: {
     getFistIndex() {
-      // let count = this.users.length;
-      let count = this.count;
+      let count = this.users.length;
+      // let count = this.count;
       let result = count;
       console.log(count % 9);
       if (count <= 1) {
@@ -59,7 +72,8 @@ export default {
       return result;
     },
     getSecondIndex() {
-      let count = this.count;
+      let count = this.users.length;
+      // let count = this.count;
       let result = count;
       if (count <= 1) {
         result = count - 1;
@@ -92,7 +106,8 @@ export default {
       return result;
     },
     getThirdIndex() {
-      let count = this.count;
+      let count = this.users.length;
+      // let count = this.count;
       let result = count;
       if (count <= 1) {
         result = count - 1;
@@ -125,7 +140,8 @@ export default {
       return result;
     },
     get4Index() {
-      let count = this.count;
+      let count = this.users.length;
+      // let count = this.count;
       let result = count;
       if (count <= 1) {
         result = count - 1;
@@ -158,7 +174,8 @@ export default {
       return result;
     },
     get5Index() {
-      let count = this.count;
+      let count = this.users.length;
+      // let count = this.count;
       let result = count;
       if (count <= 1) {
         result = count - 1;
@@ -191,7 +208,8 @@ export default {
       return result;
     },
     get6Index() {
-      let count = this.count;
+      let count = this.users.length;
+      // let count = this.count;
       let result = count;
       if (count <= 1) {
         result = count - 1;
@@ -224,7 +242,8 @@ export default {
       return result;
     },
     get7Index() {
-      let count = this.count;
+      let count = this.users.length;
+      // let count = this.count;
       let result = count;
       if (count <= 1) {
         result = count - 1;
@@ -257,7 +276,8 @@ export default {
       return result;
     },
     get7Index() {
-      let count = this.count;
+      let count = this.users.length;
+      // let count = this.count;
       let result = count;
       if (count <= 1) {
         result = count - 1;
@@ -290,7 +310,8 @@ export default {
       return result;
     },
     get8Index() {
-      let count = this.count;
+      let count = this.users.length;
+      // let count = this.count;
       let result = count;
       if (count <= 1) {
         result = count - 1;

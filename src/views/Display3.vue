@@ -1,112 +1,352 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6">
-        <h2>Current Camera</h2>
-        <code v-if="device">{{ device.label }}</code>
-        <div class="border">
-          <vue-web-cam
-            ref="webcam"
-            :device-id="deviceId"
-            width="100%"
-            @started="onStarted"
-            @stopped="onStopped"
-            @error="onError"
-            @cameras="onCameras"
-            @camera-change="onCameraChange"
-          />
-        </div>
-
-        <div class="row">
-          <div class="col-md-12">
-            <select v-model="camera">
-              <option>-- Select Device --</option>
-              <option
-                v-for="device in devices"
-                :key="device.deviceId"
-                :value="device.deviceId"
-              >{{ device.label }}</option>
-            </select>
-          </div>
-          <div class="col-md-12">
-            <button type="button" class="btn btn-primary" @click="onCapture">Capture Photo</button>
-            <button type="button" class="btn btn-danger" @click="onStop">Stop Camera</button>
-            <button type="button" class="btn btn-success" @click="onStart">Start Camera</button>
-          </div>
-        </div>
+  <div class="home">
+    <div v-if="users.length >= 9">
+      <div style="width:50%; height:100%; float:left">
+        <card :user="users[getThirdIndex]" :index="index" size="x"/>
       </div>
-      <div class="col-md-6">
-        <h2>Captured Image</h2>
-        <figure class="figure">
-          <img :src="img" class="img-responsive">
-        </figure>
+      <div style="width:50%; height:100%; float:right">
+        <div style="width:100%;  height:50%; float:left">
+          <card :user="users[get6Index]" :index="index" size="y"/>
+        </div>
+        <div style="width:100%;  height:50%; float:left">
+          <card :user="users[get8Index+1]" :index="index" size="y"/>
+        </div>
       </div>
     </div>
+    <div v-if-else="users.length >= 6">
+      <div style="width:50%; height:100%; float:left">
+        <card :user="users[getThirdIndex]" :index="index" size="x"/>
+      </div>
+      <div style="width:50%; height:100%; float:left">
+        <card :user="users[get6Index]" :index="index" size="x"/>
+      </div>
+    </div>
+    <div v-if-else="users.length >= 3">
+      <div style="width:100%; height:100%; float:left">
+        <card :user="users[getThirdIndex]" :index="index" size="x"/>
+      </div>
+    </div>
+    <!-- <input type="text" v-model="count"> -->
   </div>
 </template>
 
 <script>
-import { WebCam } from "vue-web-cam";
-
+import Card from "../components/Card";
+import { usersRef } from "@/firebaseConfig.js";
 export default {
-  name: "App",
-  components: {
-    "vue-web-cam": WebCam
+  firebase: {
+    users: usersRef
   },
   data() {
     return {
-      img: null,
-      camera: null,
-      deviceId: null,
-      devices: []
+      count: 0
     };
   },
+  components: {
+    Card
+  },
   computed: {
-    device: function() {
-      return this.devices.find(n => n.deviceId === this.deviceId);
-    }
-  },
-  watch: {
-    camera: function(id) {
-      this.deviceId = id;
-    },
-    devices: function() {
-      // Once we have a list select the first one
-      const [first, ...tail] = this.devices;
-      if (first) {
-        this.camera = first.deviceId;
-        this.deviceId = first.deviceId;
+    getFistIndex() {
+      let count = this.users.length;
+      // let count = this.count;
+      let result = count;
+      console.log(count % 9);
+      if (count <= 1) {
+        result = count - 1;
+      } else {
+        if (count % 9 == 0) {
+          result = count - 1;
+        } else {
+          var i;
+          for (i = 0; i <= count; i++) {
+            if (count % 9 === i) {
+              result = count - i;
+            }
+          }
+        }
       }
+      if (result < 9) {
+        return result;
+      } else if (result % 9 === 0) {
+        return result - 1;
+      }
+      return result;
+    },
+    getSecondIndex() {
+      let count = this.users.length;
+      // let count = this.count;
+      let result = count;
+      if (count <= 1) {
+        result = count - 1;
+      } else {
+        if (count % 9 == 0) {
+          result = count - 8;
+        } else if (count % 9 == 1) {
+          result = count - 1;
+        } else if (count % 9 == 2) {
+          result = count - 1;
+        } else if (count % 9 == 3) {
+          result = count - 2;
+        } else if (count % 9 == 4) {
+          result = count - 3;
+        } else if (count % 9 == 5) {
+          result = count - 4;
+        } else if (count % 9 == 6) {
+          result = count - 5;
+        } else if (count % 9 == 7) {
+          result = count - 6;
+        } else if (count % 9 == 8) {
+          result = count - 7;
+        }
+      }
+      if (result < 9) {
+        return result;
+      } else if (result % 9 === 1) {
+        return result - 1;
+      }
+      return result;
+    },
+    getThirdIndex() {
+      let count = this.users.length;
+      // let count = this.count;
+      let result = count;
+      if (count <= 1) {
+        result = count - 1;
+      } else {
+        if (count % 9 == 0) {
+          result = count - 7;
+        } else if (count % 9 == 1) {
+          result = count - 8;
+        } else if (count % 9 == 2) {
+          result = count - 1;
+        } else if (count % 9 == 3) {
+          result = count - 1;
+        } else if (count % 9 == 4) {
+          result = count - 2;
+        } else if (count % 9 == 5) {
+          result = count - 3;
+        } else if (count % 9 == 6) {
+          result = count - 4;
+        } else if (count % 9 == 7) {
+          result = count - 5;
+        } else if (count % 9 == 8) {
+          result = count - 6;
+        }
+      }
+      if (result < 9) {
+        return result;
+      } else if (result % 9 === 2) {
+        return result - 1;
+      }
+      return result;
+    },
+    get4Index() {
+      let count = this.users.length;
+      // let count = this.count;
+      let result = count;
+      if (count <= 1) {
+        result = count - 1;
+      } else {
+        if (count % 9 == 0) {
+          result = count - 6;
+        } else if (count % 9 == 1) {
+          result = count - 7;
+        } else if (count % 9 == 2) {
+          result = count - 8;
+        } else if (count % 9 == 3) {
+          result = count - 1;
+        } else if (count % 9 == 4) {
+          result = count - 1;
+        } else if (count % 9 == 5) {
+          result = count - 2;
+        } else if (count % 9 == 6) {
+          result = count - 3;
+        } else if (count % 9 == 7) {
+          result = count - 4;
+        } else if (count % 9 == 8) {
+          result = count - 5;
+        }
+      }
+      if (result < 9) {
+        return result;
+      } else if (result % 9 === 3) {
+        return result - 1;
+      }
+      return result;
+    },
+    get5Index() {
+      let count = this.users.length;
+      // let count = this.count;
+      let result = count;
+      if (count <= 1) {
+        result = count - 1;
+      } else {
+        if (count % 9 == 0) {
+          result = count - 5;
+        } else if (count % 9 == 1) {
+          result = count - 6;
+        } else if (count % 9 == 2) {
+          result = count - 7;
+        } else if (count % 9 == 3) {
+          result = count - 8;
+        } else if (count % 9 == 4) {
+          result = count - 1;
+        } else if (count % 9 == 5) {
+          result = count - 1;
+        } else if (count % 9 == 6) {
+          result = count - 2;
+        } else if (count % 9 == 7) {
+          result = count - 3;
+        } else if (count % 9 == 8) {
+          result = count - 4;
+        }
+      }
+      if (result < 9) {
+        return result;
+      } else if (result % 9 === 4) {
+        return result - 1;
+      }
+      return result;
+    },
+    get6Index() {
+      let count = this.users.length;
+      // let count = this.count;
+      let result = count;
+      if (count <= 1) {
+        result = count - 1;
+      } else {
+        if (count % 9 == 0) {
+          result = count - 4;
+        } else if (count % 9 == 1) {
+          result = count - 5;
+        } else if (count % 9 == 2) {
+          result = count - 6;
+        } else if (count % 9 == 3) {
+          result = count - 7;
+        } else if (count % 9 == 4) {
+          result = count - 8;
+        } else if (count % 9 == 5) {
+          result = count - 1;
+        } else if (count % 9 == 6) {
+          result = count - 1;
+        } else if (count % 9 == 7) {
+          result = count - 2;
+        } else if (count % 9 == 8) {
+          result = count - 3;
+        }
+      }
+      if (result < 9) {
+        return result;
+      } else if (result % 9 === 5) {
+        return result - 1;
+      }
+      return result;
+    },
+    get7Index() {
+      let count = this.users.length;
+      // let count = this.count;
+      let result = count;
+      if (count <= 1) {
+        result = count - 1;
+      } else {
+        if (count % 9 == 0) {
+          result = count - 3;
+        } else if (count % 9 == 1) {
+          result = count - 4;
+        } else if (count % 9 == 2) {
+          result = count - 5;
+        } else if (count % 9 == 3) {
+          result = count - 6;
+        } else if (count % 9 == 4) {
+          result = count - 7;
+        } else if (count % 9 == 5) {
+          result = count - 8;
+        } else if (count % 9 == 6) {
+          result = count - 1;
+        } else if (count % 9 == 7) {
+          result = count - 1;
+        } else if (count % 9 == 8) {
+          result = count - 2;
+        }
+      }
+      if (result < 9) {
+        return result;
+      } else if (result % 9 === 6) {
+        return result - 1;
+      }
+      return result;
+    },
+    get7Index() {
+      let count = this.users.length;
+      // let count = this.count;
+      let result = count;
+      if (count <= 1) {
+        result = count - 1;
+      } else {
+        if (count % 9 == 0) {
+          result = count - 2;
+        } else if (count % 9 == 1) {
+          result = count - 3;
+        } else if (count % 9 == 2) {
+          result = count - 4;
+        } else if (count % 9 == 3) {
+          result = count - 5;
+        } else if (count % 9 == 4) {
+          result = count - 6;
+        } else if (count % 9 == 5) {
+          result = count - 7;
+        } else if (count % 9 == 6) {
+          result = count - 8;
+        } else if (count % 9 == 7) {
+          result = count - 1;
+        } else if (count % 9 == 8) {
+          result = count - 1;
+        }
+      }
+      if (result < 9) {
+        return result;
+      } else if (result % 9 === 7) {
+        return result - 1;
+      }
+      return result;
+    },
+    get8Index() {
+      let count = this.users.length;
+      // let count = this.count;
+      let result = count;
+      if (count <= 1) {
+        result = count - 1;
+      } else {
+        if (count % 9 == 0) {
+          result = count - 1;
+        } else if (count % 9 == 1) {
+          result = count - 2;
+        } else if (count % 9 == 2) {
+          result = count - 3;
+        } else if (count % 9 == 3) {
+          result = count - 4;
+        } else if (count % 9 == 4) {
+          result = count - 5;
+        } else if (count % 9 == 5) {
+          result = count - 6;
+        } else if (count % 9 == 6) {
+          result = count - 7;
+        } else if (count % 9 == 7) {
+          result = count - 8;
+        } else if (count % 9 == 8) {
+          result = count - 1;
+        }
+      }
+      if (result < 9) {
+        return result;
+      } else if (result % 9 === 8) {
+        return result - 1;
+      }
+      return result;
     }
   },
-  methods: {
-    onCapture() {
-      this.img = this.$refs.webcam.capture();
-    },
-    onStarted(stream) {
-      console.log("On Started Event", stream);
-    },
-    onStopped(stream) {
-      console.log("On Stopped Event", stream);
-    },
-    onStop() {
-      this.$refs.webcam.stop();
-    },
-    onStart() {
-      this.$refs.webcam.start();
-    },
-    onError(error) {
-      console.log("On Error Event", error);
-    },
-    onCameras(cameras) {
-      this.devices = cameras;
-      console.log("On Cameras Event", cameras);
-    },
-    onCameraChange(deviceId) {
-      this.deviceId = deviceId;
-      this.camera = deviceId;
-      console.log("On Camera Change Event", deviceId);
-    }
-  }
+  name: "home"
 };
 </script>
+<style>
+</style>
