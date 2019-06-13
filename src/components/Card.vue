@@ -16,7 +16,7 @@
           <h2>{{index+1}}</h2>
         </div>
 
-        <div class="float-right">
+        <div class="logo-right">
           <img src="/logo.png" width="100" style="margin-left:-150px;">
         </div>
 
@@ -65,11 +65,13 @@ img {
   background-size: contain;
   width: 100%;
   position: absolute;
-
+  left: -100px;
+  padding-left: 100px;
   h1 {
     position: absolute;
     top: 300px;
-    left: 50px;
+    // top: 500px;
+    left: 150px;
   }
 }
 .bg3 {
@@ -120,7 +122,10 @@ img {
     background-size: contain;
   }
 }
-.float-right {
+.logo-right {
+  position: absolute;
+  right: -100px;
+  top: 0;
   img {
     position: relative;
     z-index: 10000;
