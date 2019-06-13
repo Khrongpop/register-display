@@ -68,7 +68,7 @@ img {
 
   h1 {
     position: absolute;
-    top: 475px;
+    top: 300px;
     left: 50px;
   }
 }
@@ -92,7 +92,8 @@ img {
   height: 600px;
 }
 .h-500 {
-  margin-top: 0;
+  margin-top: -90px;
+  padding-top: 90px;
   height: 500px;
 }
 .h-250 {
@@ -103,18 +104,26 @@ img {
   background: url("/bg-bot.png") no-repeat;
   background-size: contain;
   width: 100%;
-  bottom: 0;
+  // bottom: 0;
   height: 321px;
   position: absolute;
   z-index: 999;
   padding: 15px;
+  padding-top: 250px !important;
   h1 {
+    margin-top: 120px !important;
     display: inline-block;
     background-size: contain;
-    position: absolute;
-    bottom: 10px;
+    // position: absolute;
+    // bottom: 10px;
     // background: url('/bg-text.png') no-repeat;
     background-size: contain;
+  }
+}
+.float-right {
+  img {
+    position: relative;
+    z-index: 10000;
   }
 }
 </style>
