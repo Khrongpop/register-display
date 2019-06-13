@@ -1,6 +1,6 @@
 <template>
   <div>
-        <div class="s-card text-white">
+        <div class="s-card text-white" :style="`height:${windowHeight}px;`">
         <div class="s-top clearfix">
           <div class="float-left" style="margin-left:15px; margin-top:20px;">
           <h5>Visitor.</h5>
@@ -27,6 +27,9 @@ export default {
 </script>
 
 <style lang="scss">
+@import 'node_modules/bootstrap/scss/bootstrap';
+@import 'node_modules/bootstrap-vue/src/index.scss';
+
 img {
   object-fit: cover;
 }
@@ -46,12 +49,20 @@ img {
   background-size: contain;
   height: 400px;
   width: 100%;
-  margin-top: -218px;
+  bottom: -184px;
+  @include media-breakpoint-up(xl) { 
+      bottom: -200px;
+
+   }
+
   position: absolute;
   z-index: 999;
   padding: 15px;
   h1 {
-      font-size: 60px;
+    font-size: 60px;
+    display: inline-block;    
+    // background: url('/bg-text.png') no-repeat;
+      background-size: contain; 
   }
 }
 
