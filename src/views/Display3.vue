@@ -23,7 +23,7 @@
     </div>
     <div v-if-else="users.length >= 3">
       <div style="width:100%; height:100%; float:left">
-        <card :user="users[getThirdIndex]" :index="index" size="x"/>
+        <card :user="users[getThirdIndex]" :index="index" size="xl"/>
       </div>
     </div>
     <!-- <input type="text" v-model="count"> -->

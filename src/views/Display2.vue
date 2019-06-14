@@ -23,7 +23,7 @@
     </div>
     <div v-if-else="users.length >= 2">
       <div style="width:100%; height:100%; float:left">
-        <card :user="users[getSecondIndex]" :index="index" size="x"/>
+        <card :user="users[getSecondIndex]" :index="index" size="xl"/>
       </div>
     </div>
   </div>

@@ -10,7 +10,7 @@
           <img src="/logo.png" width="100" style="margin-left:-150px;">
         </div>
       </div>
-      <div v-else class="bg2 clearfix h-600">
+      <div v-else-if="size == `y`" class="bg2 clearfix h-600">
         <div class="float-left" style="margin-left:15px; margin-top:20px;">
           <h5>Visitor.</h5>
           <h2>{{index+1}}</h2>
@@ -25,7 +25,7 @@
       <div v-if="size == `y`" class="bg3 clearfix h-600"></div>
       <div class="s-img">
         <img :src="user.image" :height="windowHeight" width="100%" v-if="size == `x`">
-        <img :src="user.image" :height="windowHeight/2" width="100%" v-else>
+        <img :src="user.image" :height="windowHeight/2" width="100%" v-else-if="size == `y`">
       </div>
       <div
         class="s-bottom pt-4 text-center"
