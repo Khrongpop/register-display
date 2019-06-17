@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div v-if="users.length >= 7">
+    <!-- <div v-if="users.length >= 7">
       <div style="width:50%; height:100%; float:left">
         <card :user="users[getFistIndex]" :index="index" size="x"/>
       </div>
@@ -25,6 +25,30 @@
       <div style="width:100%; height:100%; float:left">
         <card :user="users[getFistIndex]" :index="index" size="x"/>
       </div>
+    </div>-->
+
+    <!-- <div style="width:50%; height:100%; float:left">
+      <card :user="users[get1]" :index="get1" size="x"/>
+    </div>
+    <div style="width:50%; height:100%; float:right">
+      <div style="width:100%;  height:50%; float:left">
+        <card :user="users[get2]" :index="get2" size="y"/>
+      </div>
+      <div style="width:100%;  height:50%; float:left">
+        <card :user="users[get3]" :index="get3" size="y"/>
+      </div>
+    </div>-->
+
+    <div style="width:50%; height:100%; float:left">
+      <card :user="users[get1-3]" :index="get1-3" size="x" v-if="users[get1-3]"/>
+    </div>
+    <div style="width:50%; height:100%; float:right">
+      <div style="width:100%;  height:50%; float:left">
+        <card :user="users[get2-3]" :index="get2-3" size="y" v-if="users[get1-3]"/>
+      </div>
+      <div style="width:100%;  height:50%; float:left">
+        <card :user="users[get3-3]" :index="get3-3" size="y" v-if="users[get1-3]"/>
+      </div>
     </div>
   </div>
 </template>
@@ -40,6 +64,57 @@ export default {
     Card
   },
   computed: {
+    get1() {
+      let count = this.users.length;
+      if (count <= 1) {
+        return count - 1;
+      } else {
+        if (count % 3 == 0) {
+          console.log(count % 3);
+          return count - 2 - 1;
+        } else if (count % 3 == 2) {
+          console.log(count % 2);
+          return count - 1 - 1;
+        } else {
+          console.log(count % 1);
+          return count - 1;
+        }
+      }
+    },
+    get2() {
+      let count = this.users.length;
+      if (count <= 1) {
+        return count - 1;
+      } else {
+        if (count % 3 == 0) {
+          console.log(count % 3);
+          return count - 1 - 1;
+        } else if (count % 3 == 2) {
+          console.log(count % 2);
+          return count - 1;
+        } else {
+          console.log(count % 1);
+          return count - 2 - 1;
+        }
+      }
+    },
+    get3() {
+      let count = this.users.length;
+      if (count <= 2) {
+        return count - 1;
+      } else {
+        if (count % 3 == 0) {
+          console.log(count % 3);
+          return count - 1;
+        } else if (count % 3 == 2) {
+          console.log(count % 2);
+          return count - 2 - 1;
+        } else {
+          console.log(count % 1);
+          return count - 1 - 1;
+        }
+      }
+    },
     getFistIndex() {
       let count = this.users.length;
       // let count = this.count;
