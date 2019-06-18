@@ -12,6 +12,23 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(BootstrapVue)
 Vue.config.productionTip = false
 
+import html2canvas from 'html2canvas'
+
+let MyPlugin = {
+  install(Vue, options) {
+    window.html2canvas = html2canvas
+  }
+}
+
+// ...
+import VueHtml2Canvas from 'vue-html2canvas';
+ 
+Vue.use(VueHtml2Canvas);
+Vue.use(MyPlugin)
+
+import 'babel-polyfill'
+import 'babel-plugin-transform-regenerator'
+
 Vue.mixin({
   data () {
     return {
