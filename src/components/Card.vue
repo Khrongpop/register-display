@@ -24,20 +24,20 @@
       </div>
       <div v-if="size == `y`" class="bg3 clearfix h-600"></div>
       <div class="s-img">
-        <!-- <img
-          :src="`/users/${user.image_local}`"
+        <img
+          :src="`/users/${getImageName(user.image)}`"
           :height="windowHeight"
           width="100%"
           v-if="size == `x`"
-        >-->
-        <!-- <img
-          :src="`/users/${user.image_local}`"
+        >
+        <img
+          :src="`/users/${getImageName(user.image)}`"
           :height="windowHeight/2"
           width="100%"
           v-else-if="size == `y`"
-        >-->
-        <img :src="user.image" :height="windowHeight" width="100%" v-if="size == `x`">
-        <img :src="user.image" :height="windowHeight/2" width="100%" v-else-if="size == `y`">
+        >
+        <!-- <img :src="getImageName(user.image)" :height="windowHeight" width="100%" v-if="size == `x`">
+        <img :src="user.image" :height="windowHeight/2" width="100%" v-else-if="size == `y`">-->
       </div>
       <div
         class="s-bottom pt-4 text-center"
@@ -56,6 +56,14 @@ export default {
   methods: {
     classs(classs, classs2) {
       return this.size == "x" ? classs : classs2;
+    },
+    getImageName(url) {
+      // let name = url;
+      let name = url.substring(89);
+      let index = name.indexOf("?");
+      name = name.substring(0, index);
+      // name = splits[2];
+      return name;
     }
   }
 };

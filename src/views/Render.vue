@@ -1,12 +1,16 @@
 <template>
   <div>
-    <div style="width:50%; height:100%; float:left">
+    <div style="width:100%; height:100%; float:left">
       <div ref="printMe" v-if="users[0]">
         <card :user="users[0]" :index="0" size="x"/>
-        {{getImageName(users[0].image)}}
       </div>
+      {{getImageName(users[0].image)}}
       <br>
-      <b-button @click="download">download</b-button>
+      <b-button @click="download(getImageName(users[0].image))">download</b-button>
+    </div>
+
+    <div v-for="(user, index) in users" :key="index">
+      <!-- <download-image :imageURL="user.image"/> -->
     </div>
 
     <img :src="output">
@@ -14,13 +18,15 @@
 </template>
 <script>
 import Card from "../components/Card";
+import DownloadImage from "../components/DownloadImag";
 import { usersRef } from "@/firebaseConfig.js";
 export default {
   firebase: {
     users: usersRef
   },
   components: {
-    Card
+    Card,
+    DownloadImage
   },
   data() {
     return {
@@ -29,7 +35,7 @@ export default {
     };
   },
   methods: {
-    async download() {
+    async download(name) {
       const el = this.$refs.printMe;
       // add option type to get the image version
       // if not provided the promise will return
@@ -37,8 +43,11 @@ export default {
       const options = {
         type: "dataURL"
       };
-      console.log(this.$html2canvas(el, options));
-      this.output = await this.$html2canvas(el, options);
+
+      let canvas = await this.$html2canvas(el, options);
+      console.log(canvas);
+      // this.output = canvas;
+      this.save(canvas, name);
     },
     getImageName(url) {
       // let name = url;
@@ -47,6 +56,40 @@ export default {
       name = name.substring(0, index);
       // name = splits[2];
       return name;
+    },
+    async save(url, name) {
+      let downloadFile = await this.toBlob(url);
+      url = window.URL.createObjectURL(downloadFile);
+      var a = document.createElement("a");
+      document.body.appendChild(a);
+      a.style = "display: none";
+      a.href = url;
+      a.download = name;
+      a.click();
+      window.URL.revokeObjectURL(url);
+      // var saveBlob = (function() {
+      //   var a = document.createElement("a");
+      //   document.body.appendChild(a);
+      //   a.style = "display: none";
+      //   return function(blob, fileName) {
+      //     var url = window.URL.createObjectURL(blob);
+      //     a.href = url;
+      //     a.download = fileName;
+      //     a.click();
+      //     window.URL.revokeObjectURL(url);
+      //   };
+      // })();
+      // saveBlob(file, "test.zip");
+    },
+    toBlob(url) {
+      fetch(url)
+        .then(res => res.blob())
+        .then(blob => {
+          const file = new File([blob], name, {
+            type: "image/jpeg"
+          });
+          return file;
+        });
     }
   },
   mounted() {
